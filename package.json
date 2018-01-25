@@ -1,45 +1,45 @@
 {
-    "name": "@textpress/gulp-lambda-deploy-from-s3",
-    "version": "0.1.0",
-    "description": "Initiates a CI deployment of a specified S3 build to AWS Lambda",
-    "main": "lib/index.js",
-    "repository": "github:textpress/gulp-lambda-deploy-from-s3",
-    "license": "UNLICENSED",
-    "scripts": {
-        "bump": "gulp bump --part",
-        "build": "yarn run build:clean && yarn run build:lib",
-        "build:clean": "rimraf lib",
-        "build:lib": "babel -d lib src --ignore '**/__tests__/**'",
-        "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
-        "ci-build": "yarn run build",
-        "ci-release-notes": "conventional-github-releaser -p eslint"
-    },
-    "peerDependencies": {
-        "gulp": "*"
-    },
-    "dependencies": {
-        "aws-sdk": "*",
-        "axios": "*",
-        "bluebird": "*",
-        "crypto": "*",
-        "gulp-confirm": "*",
-        "gulp-exec": "*",
-        "gulp-print": "*",
-        "gulp-util": "*",
-        "lodash": "*",
-        "through2": "*",
-        "yargs": "*"
-    },
-    "devDependencies": {
-        "@textpress/babel-preset-textpress": "*",
-        "@textpress/eslint-config-textpress": "*",
-        "@textpress/gulp-bump-version": "*",
-        "babel-register": "^6.26.0",
-        "conventional-github-releaser": "^2.0.0",
-        "eslint": "^4.15.0",
-        "flow-bin": "^0.63.1",
-        "gulp": "^3.9.1",
-        "rimraf": ">=2.6.1",
-        "yargs": "^10.0.3"
-    }
+  "name": "@textpress/gulp-lambda-deploy-from-s3",
+  "version": "0.2.0",
+  "description": "Initiates a CI deployment of a specified S3 build to AWS Lambda",
+  "main": "lib/index.js",
+  "repository": "github:textpress/gulp-lambda-deploy-from-s3",
+  "license": "UNLICENSED",
+  "scripts": {
+    "bump": "gulp bump --part",
+    "build": "yarn run build:clean && yarn run build:lib",
+    "build:clean": "rimraf lib",
+    "build:lib": "babel -d lib src --ignore '**/__tests__/**'",
+    "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
+    "ci-build": "yarn run build",
+    "ci-release-notes": "conventional-github-releaser -p eslint"
+  },
+  "peerDependencies": {
+    "gulp": "*"
+  },
+  "dependencies": {
+    "aws-sdk": "*",
+    "axios": "*",
+    "bluebird": "*",
+    "crypto": "*",
+    "gulp-confirm": "*",
+    "gulp-exec": "*",
+    "gulp-print": "*",
+    "gulp-util": "*",
+    "lodash": "*",
+    "through2": "*",
+    "yargs": "*"
+  },
+  "devDependencies": {
+    "@textpress/babel-preset-textpress": "*",
+    "@textpress/eslint-config-textpress": "*",
+    "@textpress/gulp-bump-version": "*",
+    "babel-register": "^6.26.0",
+    "conventional-github-releaser": "^2.0.0",
+    "eslint": "^4.15.0",
+    "flow-bin": "^0.63.1",
+    "gulp": "^3.9.1",
+    "rimraf": ">=2.6.1",
+    "yargs": "^10.0.3"
+  }
 }
