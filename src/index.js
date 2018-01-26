@@ -47,6 +47,11 @@ export function makeDeployRequest( body ) {
 }
 
 
+export function packageRepo( packageJson ) {
+    return packageJson.repository.replace( /^github:/, "" );
+}
+
+
 export function deploy( argv ) {
     const version = argv.version;
     if ( !isString( version ) )
@@ -66,7 +71,7 @@ export function deploy( argv ) {
             const _this = this;
 
             const body = JSON.stringify( {
-                repository: `${packageJson.author}/${packageJson.name}`,
+                repository: packageRepo( packageJson ),
                 version,
                 stage
             } );
