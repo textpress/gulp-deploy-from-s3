@@ -5,7 +5,8 @@ import Promise from "bluebird";
 import crypto from "crypto";
 import confirm from "gulp-confirm";
 import gulp from "gulp";
-import isString from "lodash/isString";
+import chalk from "chalk";
+import semver from "semver";
 import fs from "fs";
 import path from "path";
 import yargs from "yargs";
@@ -47,24 +48,34 @@ export function makeDeployRequest( body ) {
 }
 
 
+export function parseTarget( target ) {
+    const result = ( target + "" ).split( "@" );
+    return result.length == 1 && semver.valid( result[0] )
+        ? { stage: "staging", version: result[0] }
+        : { stage: result[0], version: semver.valid( result[1] ) };
+}
+
+
 export function packageRepo( packageJson ) {
     return packageJson.repository.replace( /^github:/, "" );
 }
 
 
-export function deploy( argv ) {
-    const version = argv.version;
-    if ( !isString( version ) )
-        throw new Error( "Version is missing, usage: yarn deploy -v 0.0.1 -s staging" );
+export function deploy( target ) {
+    const stages = [ "development", "staging", "production" ];
+    const usage = chalk`{bold yarn deploy {cyan <stage>}@0.0.1}, where {cyan <stage>} is one of the following: {bold ${ stages.join( ", " ) }}`;
 
-    const stage = argv.stage === true ? "staging" : argv.stage;
-    if ( [ "development", "staging", "production" ].indexOf( stage ) === -1 )
-        throw new Error( "Stage is missing, usage: yarn deploy -v 0.0.1 -s staging" );
+    const { stage, version } = parseTarget( target );
+    if ( !version )
+        throw new Error( `Version is missing, usage: ${usage}` );
+
+    if ( stages.indexOf( stage ) === -1 )
+        throw new Error( `Unknown stage, usage: ${usage}` );
 
     const packageJson = readPackageJson();
     return gulp.src( "" )
         .pipe( confirm( {
-            question: `\x1B[37mDeploy version \x1B[4m\x1B[36m${version}\x1B[24m\x1B[37m to \x1B[4m\x1B[36m${stage}\x1B[24m\x1B[37m?\x1B[22m`,
+            question: chalk`Deploy version {bold {cyan ${version}}} of {bold ${packageJson.name}} to {bold {cyan ${stage}}}?`,
             input: "_key:y"
         } ) )
         .pipe( through.obj( function ( chunk, enc, cb ) {
@@ -87,7 +98,7 @@ export function deploy( argv ) {
 
 
 export function registerTask() {
-    gulp.task( "deploy", () => deploy( yargs.alias( "v", "version" ).alias( "s", "stage" ).argv ) );
+    gulp.task( "deploy", () => deploy( yargs.argv.target ) );
 }
 
 export default deploy;

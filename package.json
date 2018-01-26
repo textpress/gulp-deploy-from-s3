@@ -15,7 +15,8 @@
     "ci-release-notes": "conventional-github-releaser -p eslint"
   },
   "peerDependencies": {
-    "gulp": "*"
+    "gulp": "*",
+    "yargs": "*"
   },
   "dependencies": {
     "aws-sdk": "*",
@@ -26,9 +27,8 @@
     "gulp-exec": "*",
     "gulp-print": "*",
     "gulp-util": "*",
-    "lodash": "*",
-    "through2": "*",
-    "yargs": "*"
+    "semver": "*",
+    "through2": "*"
   },
   "devDependencies": {
     "@textpress/babel-preset-textpress": "*",
