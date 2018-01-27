@@ -1,9 +1,9 @@
 {
-  "name": "@textpress/gulp-lambda-deploy-from-s3",
+  "name": "@textpress/gulp-deploy-from-s3",
   "version": "0.4.0",
   "description": "Initiates a CI deployment of a specified S3 build to AWS Lambda",
   "main": "lib/index.js",
-  "repository": "github:textpress/gulp-lambda-deploy-from-s3",
+  "repository": "github:textpress/gulp-deploy-from-s3",
   "license": "UNLICENSED",
   "scripts": {
     "bump": "gulp bump --part",
