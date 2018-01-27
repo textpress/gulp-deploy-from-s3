@@ -10,7 +10,6 @@
     "build": "yarn run build:clean && yarn run build:lib",
     "build:clean": "rimraf lib",
     "build:lib": "babel -d lib src --ignore '**/__tests__/**'",
-    "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
     "ci-build": "yarn run build",
     "ci-release-notes": "conventional-github-releaser -p eslint"
   },
@@ -37,7 +36,6 @@
     "babel-register": "^6.26.0",
     "conventional-github-releaser": "^2.0.0",
     "eslint": "^4.15.0",
-    "flow-bin": "^0.63.1",
     "gulp": "^3.9.1",
     "rimraf": ">=2.6.1",
     "yargs": "^10.0.3"
